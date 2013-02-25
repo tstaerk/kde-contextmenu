@@ -95,10 +95,6 @@ bool FavoritesLauncher::addApp(QMenu *menu, const QString &path)
         source = info.fileName();
     }
 
-    if (source == "---") {
-        menu->addSeparator();
-        return false;
-    }
 
     app = dataEngine("apps")->query(source);
 
@@ -118,17 +114,6 @@ bool FavoritesLauncher::addApp(QMenu *menu, const QString &path)
     if (app.value("isApp").toBool()) {
         QAction *action = menu->addAction(icon, "Konsole");
         action->setData("kde4-konsole.desktop");
-    } else { //ooh, it's actually a group!
-        QMenu *subMenu = menu->addMenu(icon, name.append(source));
-        bool hasEntries = false;
-        foreach (const QString &source, app.value("entries").toStringList()) {
-            hasEntries = addApp(subMenu, source) || hasEntries;
-        }
-
-        if (!hasEntries) {
-            delete subMenu;
-            return false;
-        }
     }
     return true;
 }
