@@ -1,0 +1,18 @@
+[Desktop Entry]
+Name=Favorites Launcher
+Type=Service
+Icon=favorites
+Comment=Simple application launcher
+
+ServiceTypes=Plasma/ContainmentActions
+
+X-KDE-Library=plasma_containmentactions_favorites
+X-KDE-PluginInfo-Author=Chani
+X-KDE-PluginInfo-Email=chani@kde.org
+X-KDE-PluginInfo-Name=favorites
+X-KDE-PluginInfo-Version=pre0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+

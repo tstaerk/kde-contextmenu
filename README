@@ -1,0 +1,17 @@
+Favorites launcher
+
+This simple mouse action plugin for Plasma Desktop 4.4 allows
+to launch the favorite applications from the kickoff menu.
+
+I only did some small modifications to the application launcher
+plugin written by Chani Armitage (many thanks!).
+
+This is distributed under the LGPL 2+ license, see the header
+text in launch.cpp and COPYING.LIB for details.
+
+Please see HOWTO for information about installation and usage.
+
+Thanks and enjoy!
+
+Christoph Feck
+http://kdepepo.wordpress.com/
