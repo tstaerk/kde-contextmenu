@@ -116,10 +116,10 @@ bool FavoritesLauncher::addApp(QMenu *menu, const QString &path)
     KIcon icon(app.value("iconName").toString());
 
     if (app.value("isApp").toBool()) {
-        QAction *action = menu->addAction(icon, name);
-        action->setData(source);
+        QAction *action = menu->addAction(icon, "Konsole");
+        action->setData("kde4-konsole.desktop");
     } else { //ooh, it's actually a group!
-        QMenu *subMenu = menu->addMenu(icon, name);
+        QMenu *subMenu = menu->addMenu(icon, name.append(source));
         bool hasEntries = false;
         foreach (const QString &source, app.value("entries").toStringList()) {
             hasEntries = addApp(subMenu, source) || hasEntries;
