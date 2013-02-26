@@ -84,14 +84,6 @@ void FavoritesLauncher::makeMenu()
 
 bool FavoritesLauncher::addApp(QMenu *menu, const QString &path)
 {
-    QFileInfo info(path);
-    QString source = "kde4-" + info.fileName();
-    Plasma::DataEngine::Data app = dataEngine("apps")->query(source);
-
-    QString name = app.value("name").toString();
-
-    app = dataEngine("apps")->query(source);
-
     KIcon icon("konsole.png");
 
     QAction *action = menu->addAction(icon, "Konsole");
