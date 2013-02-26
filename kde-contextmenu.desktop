@@ -6,7 +6,7 @@ Comment=Simple application launcher
 
 ServiceTypes=Plasma/ContainmentActions
 
-X-KDE-Library=plasma_containmentactions_favorites
+X-KDE-Library=kde-contextmenu
 X-KDE-PluginInfo-Author=Thorsten Staerk
 X-KDE-PluginInfo-Email=kde@staerk.de
 X-KDE-PluginInfo-Name=kde-contextmenu
