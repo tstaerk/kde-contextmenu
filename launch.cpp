@@ -78,11 +78,13 @@ void FavoritesLauncher::makeMenu()
 
 bool FavoritesLauncher::addApps(QMenu *menu)
 {
-    KIcon icon("konsole-linux32");
-    QAction* action = menu->addAction(icon, "Konsole");
+    QAction* action = menu->addAction(KIcon("system-run"), "Open a console");
     action->setData("kde4-konsole.desktop");
 
-    action = menu->addAction(KIcon(), "Screenshot");
+    action =menu->addAction(KIcon("firefox"), "Surf the web");
+    action->setData("firefox.desktop");
+    
+    action = menu->addAction(KIcon("ksnapshot"), "Take a screenshot");
     action->setData("kde4-ksnapshot.desktop");
     return true;
 }
