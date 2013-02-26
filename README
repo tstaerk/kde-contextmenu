@@ -6,7 +6,34 @@ I did some small modifications application launcher plugin written by Christoph 
 
 This is distributed under the LGPL 2+ license, see the header text in launch.cpp and COPYING.LIB for details.
 
-Please see HOWTO for information about installation and usage.
+1. Building
+
+You need KDE 4.4 or later incl. some devel packages. E.g. under a default installation of SUSE Linux 12.2 issue the command
+ yast -i cmake libkde4-devel
+And you'll have what you need.
+
+To build and install call
+ sh setup.sh
+
+
+2. Restart KDE
+
+Before being able to use the plugin, you need to restart KDE.
+
+
+3. Configuration
+
+After restart, click on desktop with right mouse button, and select "Desktop
+Settings". Choose symbol "Mouse Actions" in the settings dialog, and click
+"Add Action..." button. Then click on this button "Input Here..." with the
+mouse button that should invoke the favorites menu (I use left button).
+
+Then in the combobox next to this button select the "Favorites Launcher", and
+hit OK. You should now be able to invoke the favorites menu by clicking on
+the desktop with the button you specified in the settings dialog.
+
+To change the entries that are visible in the menu, use the Kickoff menu.
+
 
 Thanks and enjoy!
 
