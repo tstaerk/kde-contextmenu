@@ -79,9 +79,7 @@ void FavoritesLauncher::makeMenu()
     KConfig config("kickoffrc");
     KConfigGroup favoritesGroup = config.group("Favorites");
     QList<QString> favoriteList = favoritesGroup.readEntry("FavoriteURLs", QList<QString>());
-
-        addApp(m_menu, favoriteList[0]);
-    
+    addApp(m_menu, favoriteList[0]);
 }
 
 bool FavoritesLauncher::addApp(QMenu *menu, const QString &path)
@@ -91,30 +89,13 @@ bool FavoritesLauncher::addApp(QMenu *menu, const QString &path)
     Plasma::DataEngine::Data app = dataEngine("apps")->query(source);
 
     QString name = app.value("name").toString();
-    if (name.isEmpty()) {
-        source = info.fileName();
-    }
-
 
     app = dataEngine("apps")->query(source);
 
-    if (!app.value("display").toBool()) {
-        kDebug() << "hidden entry" << source;
-        return false;
-    }
-    name = app.value("name").toString();
-    if (name.isEmpty()) {
-        kDebug() << "failed source" << source;
-        return false;
-    }
+    KIcon icon("konsole.png");
 
-    name.replace("&", "&&"); //escaping
-    KIcon icon(app.value("iconName").toString());
-
-    if (app.value("isApp").toBool()) {
-        QAction *action = menu->addAction(icon, "Konsole");
-        action->setData("kde4-konsole.desktop");
-    }
+    QAction *action = menu->addAction(icon, "Konsole");
+    action->setData("kde4-konsole.desktop");
     return true;
 }
 
