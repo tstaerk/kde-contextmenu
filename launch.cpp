@@ -68,26 +68,22 @@ QList<QAction *> FavoritesLauncher::contextualActions()
 
 void FavoritesLauncher::makeMenu()
 {
-    Plasma::DataEngine *apps = dataEngine("apps");
-    if (!apps->isValid()) {
-        return;
-    }
-
     m_menu->clear();
 
     // add the favorites
     KConfig config("kickoffrc");
     KConfigGroup favoritesGroup = config.group("Favorites");
-    QList<QString> favoriteList = favoritesGroup.readEntry("FavoriteURLs", QList<QString>());
-    addApp(m_menu, favoriteList[0]);
+    addApps(m_menu);
 }
 
-bool FavoritesLauncher::addApp(QMenu *menu, const QString &path)
+bool FavoritesLauncher::addApps(QMenu *menu)
 {
-    KIcon icon("konsole.png");
-
-    QAction *action = menu->addAction(icon, "Konsole");
+    KIcon icon("konsole-linux32");
+    QAction* action = menu->addAction(icon, "Konsole");
     action->setData("kde4-konsole.desktop");
+
+    action = menu->addAction(KIcon(), "Screenshot");
+    action->setData("kde4-ksnapshot.desktop");
     return true;
 }
 
