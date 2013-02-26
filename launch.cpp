@@ -79,9 +79,9 @@ void FavoritesLauncher::makeMenu()
     KConfig config("kickoffrc");
     KConfigGroup favoritesGroup = config.group("Favorites");
     QList<QString> favoriteList = favoritesGroup.readEntry("FavoriteURLs", QList<QString>());
-    foreach (const QString &source, favoriteList) {
-        addApp(m_menu, source);
-    }
+
+        addApp(m_menu, favoriteList[0]);
+    
 }
 
 bool FavoritesLauncher::addApp(QMenu *menu, const QString &path)
