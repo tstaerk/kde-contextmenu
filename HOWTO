@@ -4,28 +4,16 @@ You need KDE SC 4.4 installed with complete development/header files. This
 means installed make, cmake, and g++ compiler, as well as kdelibs5-devel
 packages. Please refer to your distributions forum for exact package names.
 
-To build, type the following commands in Konsole:
-
-    cd containmentaction-favorites-0.2
-    mkdir build
-    cd build
-    cmake -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix` ..
-    make
+To build and install call
+ sh setup.sh
 
 
-2. Installing
-
-To install, you need root password:
-
-    sudo make install
-
-
-3. Restart KDE
+2. Restart KDE
 
 Before being able to use the plugin, you need to restart KDE.
 
 
-4. Configuration
+3. Configuration
 
 After restart, click on desktop with right mouse button, and select "Desktop
 Settings". Choose symbol "Mouse Actions" in the settings dialog, and click
