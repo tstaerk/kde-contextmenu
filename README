@@ -4,7 +4,7 @@ This simple mouse action plugin for Plasma Desktop 4.4 allows to launch the favo
 
 I did some small modifications application launcher plugin written by Christoph Feck (many thanks!).
 
-This is distributed under the LGPL 2+ license, see the header text in launch.cpp and COPYING.LIB for details.
+This is distributed under the LGPL 2+ license, see the header text in launch.cpp and COPYING for details.
 
 1. Building
 
@@ -38,4 +38,4 @@ To change the entries that are visible in the menu, use the Kickoff menu.
 Thanks and enjoy!
 
 Thorsten Staerk
-http://www.staerk.de/thorsten
+http://www.staerk.de/thorsten/kde-contextmenu
