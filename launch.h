@@ -35,7 +35,6 @@ class FavoritesLauncher : public Plasma::ContainmentActions
         void init(const KConfigGroup &config);
 
         void contextEvent(QEvent *event);
-        QList<QAction *> contextualActions();
         //returns true if something (other than a separator) was successfully added
         bool addApps(QMenu *menu);
 

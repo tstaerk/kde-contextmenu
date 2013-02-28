@@ -1,5 +1,6 @@
 /*
  *   Copyright 2009 by Chani Armitage <chani@kde.org>
+ *   Copyright 2013 by Thorsten Staerk <kde@staerk.de>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -57,15 +58,6 @@ void FavoritesLauncher::contextEvent(QEvent *event)
     m_menu->exec(popupPosition(m_menu->size(), event));
 }
 
-QList<QAction *> FavoritesLauncher::contextualActions()
-{
-    makeMenu();
-
-    QList<QAction *> list;
-    list << m_action;
-    return list;
-}
-
 void FavoritesLauncher::makeMenu()
 {
     m_menu->clear();
@@ -94,7 +86,8 @@ void FavoritesLauncher::switchTo(QAction *action)
     QString source = action->data().toString();
     kDebug() << source;
     Plasma::Service *service = dataEngine("apps")->serviceForSource(source);
-    if (service) {
+    if (service) 
+    {
         service->startOperationCall(service->operationDescription("launch"));
     }
 }
