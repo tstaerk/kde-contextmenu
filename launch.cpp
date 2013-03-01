@@ -38,7 +38,6 @@ ConTextMenu::ConTextMenu(QObject *parent, const QVariantList &args)
 {
     m_menu = new KMenu();
     connect(m_menu, SIGNAL(triggered(QAction*)), this, SLOT(switchTo(QAction*)));
-
     m_action->setMenu(m_menu);
 }
 
@@ -60,8 +59,16 @@ void ConTextMenu::contextEvent(QEvent *event)
 
 void ConTextMenu::makeMenu()
 {
-    m_menu->clear();
     addApps(m_menu);
+}
+
+QList<QAction *> ConTextMenu::contextualActions()
+{
+    m_menu->clear(); // otherwise every time you build it it will duplicate its content
+    makeMenu();
+    QList<QAction *> list;
+    list << m_action;
+    return list;
 }
 
 bool ConTextMenu::addApps(QMenu *menu)

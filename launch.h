@@ -33,7 +33,7 @@ class ConTextMenu : public Plasma::ContainmentActions
         ~ConTextMenu();
 
         void init(const KConfigGroup &config);
-
+        QList<QAction *> contextualActions();
         void contextEvent(QEvent *event);
         //returns true if something (other than a separator) was successfully added
         bool addApps(QMenu *menu);
