@@ -32,7 +32,7 @@
 #include <Plasma/Containment>
 #include <Plasma/Service>
 
-FavoritesLauncher::FavoritesLauncher(QObject *parent, const QVariantList &args)
+ConTextMenu::ConTextMenu(QObject *parent, const QVariantList &args)
     : Plasma::ContainmentActions(parent, args)
     , m_action(new QAction(this))
 {
@@ -42,38 +42,34 @@ FavoritesLauncher::FavoritesLauncher(QObject *parent, const QVariantList &args)
     m_action->setMenu(m_menu);
 }
 
-FavoritesLauncher::~FavoritesLauncher()
+ConTextMenu::~ConTextMenu()
 {
     delete m_menu;
 }
 
-void FavoritesLauncher::init(const KConfigGroup &)
+void ConTextMenu::init(const KConfigGroup &)
 {
 }
 
-void FavoritesLauncher::contextEvent(QEvent *event)
+void ConTextMenu::contextEvent(QEvent *event)
 {
     makeMenu();
     m_menu->adjustSize();
     m_menu->exec(popupPosition(m_menu->size(), event));
 }
 
-void FavoritesLauncher::makeMenu()
+void ConTextMenu::makeMenu()
 {
     m_menu->clear();
-
-    // add the favorites
-    KConfig config("kickoffrc");
-    KConfigGroup favoritesGroup = config.group("Favorites");
     addApps(m_menu);
 }
 
-bool FavoritesLauncher::addApps(QMenu *menu)
+bool ConTextMenu::addApps(QMenu *menu)
 {
     QAction* action = menu->addAction(KIcon("system-run"), "Open a console");
     action->setData("kde4-konsole.desktop");
 
-    action =menu->addAction(KIcon("firefox"), "Surf the web");
+    action = menu->addAction(KIcon("firefox"), "Surf the web");
     action->setData("firefox.desktop");
     
     action = menu->addAction(KIcon("ksnapshot"), "Take a screenshot");
@@ -81,7 +77,7 @@ bool FavoritesLauncher::addApps(QMenu *menu)
     return true;
 }
 
-void FavoritesLauncher::switchTo(QAction *action)
+void ConTextMenu::switchTo(QAction *action)
 {
     QString source = action->data().toString();
     kDebug() << source;

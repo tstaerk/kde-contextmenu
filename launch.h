@@ -17,20 +17,20 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef FAVORITESLAUNCHER_HEADER
-#define FAVORITESLAUNCHER_HEADER
+#ifndef CONTEXTMENU_HEADER
+#define CONTEXTMENU_HEADER
 
 #include <plasma/containmentactions.h>
 
 class QAction;
 class KMenu;
 
-class FavoritesLauncher : public Plasma::ContainmentActions
+class ConTextMenu : public Plasma::ContainmentActions
 {
     Q_OBJECT
     public:
-        FavoritesLauncher(QObject* parent, const QVariantList& args);
-        ~FavoritesLauncher();
+        ConTextMenu(QObject* parent, const QVariantList& args);
+        ~ConTextMenu();
 
         void init(const KConfigGroup &config);
 
@@ -49,6 +49,6 @@ class FavoritesLauncher : public Plasma::ContainmentActions
         QAction *m_action;
 };
 
-K_EXPORT_PLASMA_CONTAINMENTACTIONS(favorites, FavoritesLauncher)
+K_EXPORT_PLASMA_CONTAINMENTACTIONS(favorites, ConTextMenu)
 
 #endif
