@@ -2,7 +2,7 @@ KDE Context Menu
 
 This simple mouse action plugin for Plasma Desktop 4.4 allows to launch the favorite applications konsole and ksnapshot.
 
-I did some small modifications application launcher plugin written by Christoph Feck (many thanks!).
+I did some small modifications to the application launcher plugin written by Christoph Feck (many thanks!).
 
 This is distributed under the LGPL 2+ license, see the header text in launch.cpp and COPYING for details.
 
@@ -28,11 +28,9 @@ Settings". Choose symbol "Mouse Actions" in the settings dialog, and click
 "Add Action..." button. Then click on this button "Input Here..." with the
 mouse button that should invoke the favorites menu (I use left button).
 
-Then in the combobox next to this button select the "Favorites Launcher", and
+Then in the combobox next to this button select the "KDE Context Menu", and
 hit OK. You should now be able to invoke the favorites menu by clicking on
 the desktop with the button you specified in the settings dialog.
-
-To change the entries that are visible in the menu, use the Kickoff menu.
 
 
 Thanks and enjoy!
