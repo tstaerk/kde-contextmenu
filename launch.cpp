@@ -81,7 +81,11 @@ bool ConTextMenu::addApps(QMenu *menu)
     
     action = menu->addAction(KIcon("ksnapshot"), "Take a screenshot");
     action->setData("kde4-ksnapshot.desktop");
-
+    
+    QAction* sep1 = new QAction(this);
+    sep1->setSeparator(true);
+    menu->addAction(sep1);
+    
     Plasma::Containment *c = containment();
     Q_ASSERT(c);
     menu->addAction(c->action("configure"));   
