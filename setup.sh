@@ -12,8 +12,8 @@ die() { echo "$@" 1>&2 ;exit 1; }
 cd $(dirname $0)
 mkdir -p build 2>/dev/null || die "Cannot create a directory named \"build\". Please fix your permissions."
 cd build
-cmake -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix` .. 2>/dev/null || die "Cannot call cmake. Please install cmake."
-make -j8 2>/dev/null || die "Cannot build. Make sure gcc, make and libkde4-devel is installed."
+cmake -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix` .. 2>/dev/null || die "Cannot call cmake. Please install cmake, gcc and libkde4-devel."
+make -j8 2>/dev/null || die "Cannot build. Make sure the software 'make' is installed."
 make install 2>/dev/null || die "Cannot install. Make sure you are root."
 
 # re-discover .desktop files
