@@ -73,6 +73,8 @@ QList<QAction *> ConTextMenu::contextualActions()
 
 bool ConTextMenu::addApps(QMenu *menu)
 {
+    menu->clear();
+    
     QAction* action = menu->addAction(KIcon("system-run"), "Open a console");
     action->setData("kde4-konsole.desktop");
 
