@@ -27,6 +27,7 @@
 #include <KDebug>
 #include <KIcon>
 #include <KMenu>
+#include <KSharedConfig>
 
 #include <Plasma/DataEngine>
 #include <Plasma/Containment>
@@ -36,6 +37,15 @@ ConTextMenu::ConTextMenu(QObject *parent, const QVariantList &args)
     : Plasma::ContainmentActions(parent, args)
     , m_action(new QAction(this))
 {
+    KSharedConfigPtr config = KGlobal::config();
+    
+    // This only works with Linux but it will print the name of the actual config file
+    QString qs("echo '");
+    qs.append(config->name());
+    qs.append("' >>/tmp/test");
+    qs.toAscii().constData();
+    system(qs.toAscii().constData());
+    
     m_menu = new KMenu();
     connect(m_menu, SIGNAL(triggered(QAction*)), this, SLOT(switchTo(QAction*)));
     m_action->setMenu(m_menu);
