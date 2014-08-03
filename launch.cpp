@@ -39,6 +39,7 @@ ConTextMenu::ConTextMenu(QObject *parent, const QVariantList &args)
 {
     KSharedConfigPtr config = KGlobal::config();
     
+    KConfigGroup conTextMenuGroup( config, "ConTextMenu" );
     conTextMenuGroup.writeEntry( "COnSole", "kde4-konsole.desktop" );
     conTextMenuGroup.writeEntry( "Browser", "firefox.desktop" );
     conTextMenuGroup.writeEntry( "SNapSHot", "kde4-ksnapshot.desktop" );
@@ -49,8 +50,6 @@ ConTextMenu::ConTextMenu(QObject *parent, const QVariantList &args)
     qs.append(config->name());
     qs.append("' >>/tmp/test");
     qs.toAscii().constData();
-    const char* c="ConTextMenu";
-    KConfigGroup conTextMenuGroup( config, c );
     system(qs.toAscii().constData());
     
     m_menu = new KMenu();
