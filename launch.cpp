@@ -39,6 +39,11 @@ ConTextMenu::ConTextMenu(QObject *parent, const QVariantList &args)
 {
     KSharedConfigPtr config = KGlobal::config();
     
+    conTextMenuGroup.writeEntry( "COnSole", "kde4-konsole.desktop" );
+    conTextMenuGroup.writeEntry( "Browser", "firefox.desktop" );
+    conTextMenuGroup.writeEntry( "SNapSHot", "kde4-ksnapshot.desktop" );
+    conTextMenuGroup.config()->sync();
+    
     // This only works with Linux but it will print the name of the actual config file
     QString qs("echo '");
     qs.append(config->name());
@@ -46,13 +51,6 @@ ConTextMenu::ConTextMenu(QObject *parent, const QVariantList &args)
     qs.toAscii().constData();
     const char* c="ConTextMenu";
     KConfigGroup conTextMenuGroup( config, c );
-    
-    const char* c2="firefox.desktop";
-    conTextMenuGroup.writeEntry( "COnSole", "kde4-konsole.desktop" );
-    conTextMenuGroup.writeEntry( "Browser", c2 );
-    conTextMenuGroup.writeEntry( "SNapSHot", "kde4-ksnapshot.desktop" );
-    conTextMenuGroup.config()->sync();
-    
     system(qs.toAscii().constData());
     
     m_menu = new KMenu();
