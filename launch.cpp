@@ -33,24 +33,31 @@
 #include <Plasma/Containment>
 #include <Plasma/Service>
 
+void messagetofile(QString q)
+{
+    // This only works with Linux but it will print the name of the actual config file
+    QString qs("echo '");
+    qs.append(q);
+    qs.append("' >>/tmp/test");
+    qs.toAscii().constData();
+    system(qs.toAscii().constData());
+}
+
 ConTextMenu::ConTextMenu(QObject *parent, const QVariantList &args)
     : Plasma::ContainmentActions(parent, args)
     , m_action(new QAction(this))
 {
     KSharedConfigPtr config = KGlobal::config();
-    
     KConfigGroup conTextMenuGroup( config, "ConTextMenu" );
-    conTextMenuGroup.writeEntry( "COnSole", "kde4-konsole.desktop" );
-    conTextMenuGroup.writeEntry( "Browser", "firefox.desktop" );
-    conTextMenuGroup.writeEntry( "SNapSHot", "kde4-ksnapshot.desktop" );
+    messagetofile(conTextMenuGroup.readEntry( "COnSole", "kde4-konsole.desktop" ));
+    QString console=conTextMenuGroup.readEntry( "COnSole", "kde4-konsole.desktop" );
+    QString browser=conTextMenuGroup.readEntry( "Browser", "firefox.desktop" );
+    QString snapshot=conTextMenuGroup.readEntry( "SNapSHot", "kde4-ksnapshot.desktop" );
+    //e.g. /usr/share/applications/kde4/ksnapshot.desktop
+    conTextMenuGroup.writeEntry( "COnSole", console );
+    conTextMenuGroup.writeEntry( "Browser", browser );
+    conTextMenuGroup.writeEntry( "SNapSHot", snapshot );
     conTextMenuGroup.config()->sync();
-    
-    // This only works with Linux but it will print the name of the actual config file
-    QString qs("echo '");
-    qs.append(config->name());
-    qs.append("' >>/tmp/test");
-    qs.toAscii().constData();
-    system(qs.toAscii().constData());
     
     m_menu = new KMenu();
     connect(m_menu, SIGNAL(triggered(QAction*)), this, SLOT(switchTo(QAction*)));
@@ -89,16 +96,23 @@ QList<QAction *> ConTextMenu::contextualActions()
 
 bool ConTextMenu::addApps(QMenu *menu)
 {
+    KSharedConfigPtr config = KGlobal::config();
+    KConfigGroup conTextMenuGroup( config, "ConTextMenu" );
+    messagetofile(conTextMenuGroup.readEntry( "COnSole", "kde4-konsole.desktop" ));
+    QString console=conTextMenuGroup.readEntry( "COnSole", "kde4-konsole.desktop" );
+    QString browser=conTextMenuGroup.readEntry( "Browser", "firefox.desktop" );
+    QString snapshot=conTextMenuGroup.readEntry( "SNapSHot", "kde4-ksnapshot.desktop" );
+
     menu->clear();
     
     QAction* action = menu->addAction(KIcon("system-run"), "Open a console");
-    action->setData("kde4-konsole.desktop");
+    action->setData(console);
 
     action = menu->addAction(KIcon("firefox"), "Surf the web");
-    action->setData("firefox.desktop");
+    action->setData(browser);
     
     action = menu->addAction(KIcon("ksnapshot"), "Take a screenshot");
-    action->setData("kde4-ksnapshot.desktop");
+    action->setData(snapshot);
     
     QAction* sep1 = new QAction(this);
     sep1->setSeparator(true);
