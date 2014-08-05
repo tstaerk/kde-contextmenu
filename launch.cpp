@@ -37,11 +37,15 @@
 void messagetofile(QString q)
 {
     KSaveFile file("/tmp/kde-contextmenu.log");
-    file.open();
-    QByteArray outputByteArray(q.toUtf8());
-    file.write(outputByteArray);
+    file.open(QIODevice::Append | QIODevice::Text);
+    file.write(q.toAscii());
     file.finalize();
+    file.flush();
     file.close();
+    QFile qf("/tmp/test");
+    qf.open(QIODevice::Append);
+    qf.write(q.toAscii());
+    qf.close();
 }
 
 ConTextMenu::ConTextMenu(QObject *parent, const QVariantList &args)
@@ -129,6 +133,7 @@ bool ConTextMenu::addApps(QMenu *menu)
 void ConTextMenu::switchTo(QAction *action)
 {
     QString source = action->data().toString();
+    messagetofile(source);
     kDebug() << source;
     Plasma::Service *service = dataEngine("apps")->serviceForSource(source);
     if (service) 
