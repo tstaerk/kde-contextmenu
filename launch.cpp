@@ -27,7 +27,6 @@
 #include <KDebug>
 #include <KIcon>
 #include <KMenu>
-#include <KSaveFile>
 #include <KSharedConfig>
 
 #include <Plasma/DataEngine>
@@ -36,15 +35,9 @@
 
 void messagetofile(QString q)
 {
-    KSaveFile file("/tmp/kde-contextmenu.log");
-    file.open(QIODevice::Append | QIODevice::Text);
-    file.write(q.toAscii());
-    file.finalize();
-    file.flush();
-    file.close();
-    QFile qf("/tmp/test");
+    QFile qf("/tmp/kde-contextmenu.log");
     qf.open(QIODevice::Append);
-    qf.write(q.toAscii());
+    qf.write(q.append("\n").toAscii());
     qf.close();
 }
 
@@ -54,7 +47,6 @@ ConTextMenu::ConTextMenu(QObject *parent, const QVariantList &args)
 {
     KSharedConfigPtr config = KGlobal::config();
     KConfigGroup conTextMenuGroup( config, "ConTextMenu" );
-    messagetofile(conTextMenuGroup.readEntry( "COnSole", "kde4-konsole.desktop" ));
     QString console=conTextMenuGroup.readEntry( "COnSole", "kde4-konsole.desktop" );
     QString browser=conTextMenuGroup.readEntry( "Browser", "firefox.desktop" );
     QString snapshot=conTextMenuGroup.readEntry( "SNapSHot", "kde4-ksnapshot.desktop" );
@@ -80,20 +72,16 @@ void ConTextMenu::init(const KConfigGroup &)
 
 void ConTextMenu::contextEvent(QEvent *event)
 {
-    makeMenu();
+    addApps(m_menu);
     m_menu->adjustSize();
     m_menu->exec(popupPosition(m_menu->size(), event));
 }
 
-void ConTextMenu::makeMenu()
-{
-    addApps(m_menu);
-}
-
 QList<QAction *> ConTextMenu::contextualActions()
 {
+    messagetofile("entering contextualActions");
     m_menu->clear(); // otherwise every time you build it it will duplicate its content
-    makeMenu();
+    addApps(m_menu);
     QList<QAction *> list;
     list << m_action;
     return list;
@@ -101,6 +89,7 @@ QList<QAction *> ConTextMenu::contextualActions()
 
 bool ConTextMenu::addApps(QMenu *menu)
 {
+    messagetofile("entering addapps");
     KSharedConfigPtr config = KGlobal::config();
     KConfigGroup conTextMenuGroup( config, "ConTextMenu" );
     messagetofile(conTextMenuGroup.readEntry( "COnSole", "kde4-konsole.desktop" ));
@@ -132,14 +121,15 @@ bool ConTextMenu::addApps(QMenu *menu)
 
 void ConTextMenu::switchTo(QAction *action)
 {
+    messagetofile("entering switchTo");
     QString source = action->data().toString();
-    messagetofile(source);
     kDebug() << source;
     Plasma::Service *service = dataEngine("apps")->serviceForSource(source);
     if (service) 
     {
         service->startOperationCall(service->operationDescription("launch"));
     }
+    messagetofile("leaving switchto");
 }
 
 #include "launch.moc"

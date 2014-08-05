@@ -41,9 +41,6 @@ class ConTextMenu : public Plasma::ContainmentActions
     public slots:
         void switchTo(QAction *action);
 
-    protected:
-        void makeMenu();
-
     private:
         KMenu *m_menu;
         QAction *m_action;
