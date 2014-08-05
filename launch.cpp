@@ -27,6 +27,7 @@
 #include <KDebug>
 #include <KIcon>
 #include <KMenu>
+#include <KSaveFile>
 #include <KSharedConfig>
 
 #include <Plasma/DataEngine>
@@ -35,12 +36,12 @@
 
 void messagetofile(QString q)
 {
-    // This only works with Linux but it will print the name of the actual config file
-    QString qs("echo '");
-    qs.append(q);
-    qs.append("' >>/tmp/test");
-    qs.toAscii().constData();
-    system(qs.toAscii().constData());
+    KSaveFile file("/tmp/kde-contextmenu.log");
+    file.open();
+    QByteArray outputByteArray(q.toUtf8());
+    file.write(outputByteArray);
+    file.finalize();
+    file.close();
 }
 
 ConTextMenu::ConTextMenu(QObject *parent, const QVariantList &args)
